@@ -14,7 +14,7 @@ let slowestCount = 5;
 let failedTestDetails = [];
 let allTests = [];
 
-glob("**/TEST*.xml", async function (err, files) {
+glob("fastlane/test_output/report.junit", async function (err, files) {
   for (let index = 0; index < files.length; index++) {
     var xmlDoc = libxmljs.parseXml(fs.readFileSync(files[index]));
     var suites = xmlDoc.find("//testsuite");
