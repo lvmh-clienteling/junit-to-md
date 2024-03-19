@@ -2,11 +2,18 @@
 const fs = require("fs");
 const glob = require("glob");
 const libxmljs = require("libxmljs2");
+const argv = require('minimist')(process.argv.slice(2));
 
 let output = "status";
-if (process.argv.length > 2) {
-  output = process.argv[2];
+
+if (!argv["o"] || !argv["i"]) {
+  console.log("Missing o or i")
+  process.exit(1);
 }
+
+output = argv["o"]
+
+const junit = argv["i"]
 
 let totalTests = 0;
 let failedTests = 0;
@@ -14,7 +21,7 @@ let slowestCount = 5;
 let failedTestDetails = [];
 let allTests = [];
 
-glob("fastlane/test_output/report.junit", async function (err, files) {
+glob(junit, async function (err, files) {
   for (let index = 0; index < files.length; index++) {
     var xmlDoc = libxmljs.parseXml(fs.readFileSync(files[index]));
     var suites = xmlDoc.find("//testsuite");
