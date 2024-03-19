@@ -28,14 +28,10 @@ glob(junit, async function (err, files) {
         allTests.push(test)
         test.childNodes().forEach((failure) => {
           if (failure.name() === "failure") {
-            failedTestDetails.push(
-              suite.attr("name").value() +
-                "/" +
-                test.attr("name").value() +
-                "\n\n```\n" +
-                failure.text() +
-                "\n```"
-            );
+            const suiteName = suite.attr("name").value()
+            const testName = test.attr("name").value()
+            const failureText = failure.text()
+            failedTestDetails.push(`${suiteName}/${testName}\n\n\`\`\`\n${failureText}\n\`\`\``);
           }
         });
       });
