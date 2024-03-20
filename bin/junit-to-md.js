@@ -30,8 +30,7 @@ glob(junit, async function (err, files) {
           if (failure.name() === "failure") {
             const suiteName = suite.attr("name").value()
             const testName = test.attr("name").value()
-            const failureText = failure.text()
-            failedTestDetails.push(`${suiteName}/${testName}\n\n\`\`\`\n${failureText}\n\`\`\``);
+            failedTestDetails.push(`${suiteName}/${testName}`);
           }
         });
       });
