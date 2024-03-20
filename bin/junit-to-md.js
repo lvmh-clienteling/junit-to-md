@@ -47,9 +47,5 @@ function outputText() {
       output.push(`- ${failedTestDetails[index]}`)
     }
     console.log(output.join(`\n`))
-  } else if (totalTests > 0) {
-    console.log("No failing tests, awesome!");
-  } else {
-    console.log("No tests found.");
   }
 }
